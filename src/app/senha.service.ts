@@ -5,28 +5,53 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SenhaService {
-  private senhas: string[] = [];
-  private sequenciaAtual = 1; // Inicialize com o valor inicial da sequência
-  private senhasSubject: BehaviorSubject<string[]> = new BehaviorSubject(this.senhas);
+  private senhas: any[] = [{
+
+  }];
+  private senhasChamadas: any[] = [{
+
+  }];
+  private sequenciaGeralAtual = 1;
+  private sequenciaPrioritariaAtual = 1;
+  private sequenciaExamesAtual = 1;
+  private senhasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private senhasChamadasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]); // Subject para senhas chamadas
 
   constructor() {}
 
   // Adicionar senha ao array e notificar observadores
-  adicionarSenha(senha: string): void {
+  adicionarSenha(senha: any): void {
+    if (senha.tipo === 'geral') {
+      senha.numero = this.gerarNumero('GE', this.sequenciaGeralAtual);
+      this.sequenciaGeralAtual++;
+    } else if (senha.tipo === 'prioritario') {
+      senha.numero = this.gerarNumero('PR', this.sequenciaPrioritariaAtual);
+      this.sequenciaPrioritariaAtual++;
+    } else if (senha.tipo === 'exames') {
+      senha.numero = this.gerarNumero('EX', this.sequenciaExamesAtual);
+      this.sequenciaExamesAtual++;
+    }
+
     this.senhas.push(senha);
     this.senhasSubject.next([...this.senhas]);
   }
 
   // Obter senhas como um Observable
-  getSenhas(): Observable<string[]> {
+  getSenhas(): Observable<any[]> {
     return this.senhasSubject.asObservable();
   }
 
-  // Obter a próxima sequência e atualizá-la
-  obterProximaSequencia(): string {
-    const proximaSequencia = ('000' + this.sequenciaAtual).slice(-3); // Formata a sequência com três dígitos
-    this.sequenciaAtual++; // Atualiza a sequência para a próxima chamada
+  // Obter as senhas chamadas como um Observable
+  getSenhasChamadas(): Observable<any[]> {
+    return this.senhasChamadasSubject.asObservable();
+  }
 
-    return proximaSequencia;
+  private gerarNumero(tipo: string, sequencia: number): string {
+    const dataAtual = new Date();
+    const ano = dataAtual.getFullYear().toString().slice(-2);
+    const mes = ('0' + (dataAtual.getMonth() + 1)).slice(-2);
+    const dia = ('0' + dataAtual.getDate()).slice(-2);
+    const sequenciaFormatada = ('00' + sequencia).slice(-2);
+    return `${ano}${mes}${dia}-${tipo}${sequenciaFormatada}`;
   }
 }

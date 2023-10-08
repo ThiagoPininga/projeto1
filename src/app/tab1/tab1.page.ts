@@ -7,17 +7,45 @@ import { SenhaService } from '../senha.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  senhasChamadas: any[] = []
   constructor(private senhaService: SenhaService) {}
 
-  gerarGeral() {
-    const dataAtual = new Date();
-    const ano = dataAtual.getFullYear().toString().slice(-2);
-    const mes = ('0' + (dataAtual.getMonth() + 1)).slice(-2);
-    const dia = ('0' + dataAtual.getDate()).slice(-2);
-    const tipoSenha = 'GE'; // Tipo de senha geral
-    const sequenciaSenha = this.senhaService.obterProximaSequencia(); // Obtém a próxima sequência
+  gerarSenhaPrioritaria() {
+    const senha = {
+      tipo: 'accessibility',
+      dataEmissao: new Date().toLocaleString(),
+      dataAtendimento: '',
+      horaAtendimento: '',
+      guiche: ''
+    };
 
-    const senha = `${ano}${mes}${dia}-${tipoSenha}${sequenciaSenha}`;
+    this.senhaService.adicionarSenha(senha);
+  }
+
+  gerarSenhaGeral() {
+    const senha = {
+      tipo: 'person',
+      dataEmissao: new Date().toLocaleString(),
+      dataAtendimento: '',
+      horaAtendimento: '',
+      guiche: ''
+    };
+
+    this.senhaService.adicionarSenha(senha);
+
+    console.log(this.senhaService.getSenhas())
+    console.log(this.senhaService.getSenhasChamadas())
+
+  }
+
+  gerarSenhaExames() {
+    const senha = {
+      tipo: 'document',
+      dataEmissao: new Date().toLocaleString(),
+      dataAtendimento: '',
+      horaAtendimento: '',
+      guiche: ''
+    };
 
     this.senhaService.adicionarSenha(senha);
   }

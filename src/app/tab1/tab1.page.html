@@ -8,17 +8,17 @@
       <ion-title>GERAR SENHA</ion-title>
     </ion-card-header>
     <ion-card-content style="display: flex; justify-content: space-around;">
-      <ion-button>
-        <ion-icon></ion-icon>
+      <ion-button (click)="gerarSenhaPrioritaria()">
+        <ion-icon name="accessibility-outline"></ion-icon>
       </ion-button>
   
       <!-- Segundo botão -->
-      <ion-button>
+      <ion-button (click)="gerarSenhaGeral()" >
         <ion-label>Botão 2</ion-label>
       </ion-button>
   
       <!-- Terceiro botão -->
-      <ion-button>
+      <ion-button (click)="gerarSenhaExames()">
         <ion-label>Botão 3</ion-label>
       </ion-button>
     </ion-card-content>
@@ -26,8 +26,15 @@
 
   <ion-card>
     <ion-card-header>
-
+      <ion-card-title>SENHAS CHAMADAS</ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      <ion-card *ngFor="let senhas of senhasChamadas" >
+        <ion-content>
+          <ion-icon name="{{senhas.tipo}}"></ion-icon>
+        </ion-content>
+      </ion-card>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 
