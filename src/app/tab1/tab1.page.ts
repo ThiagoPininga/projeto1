@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component} from '@angular/core';
 import { SenhaService } from '../senha.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class Tab1Page {
       numero: "231017-SP01"
     }
   ];
-  constructor(private senhaService: SenhaService, private cdr: ChangeDetectorRef) {}
+  constructor(private senhaService: SenhaService) {}
 
   gerarSenhaPrioritaria() {
     const senha = {
@@ -41,8 +41,8 @@ export class Tab1Page {
       numero: ""
     };
 
-    this.senhaService.adicionarSenha(senha);
-    this.cdr.detectChanges()
+    const numeroSenha = this.senhaService.adicionarSenha(senha);
+    this.mostrarAlert(numeroSenha)
   }
 
   gerarSenhaGeral() {
@@ -55,13 +55,12 @@ export class Tab1Page {
       numero: ""
     };
 
-    this.senhaService.adicionarSenha(senha);
-    this.cdr.detectChanges()
+    const numeroSenha = this.senhaService.adicionarSenha(senha);
+    this.mostrarAlert(numeroSenha)
 
 
     console.log(this.senhaService.getSenhas())
     console.log(this.senhaService.getSenhasChamadas())
-
   }
 
   gerarSenhaExames() {
@@ -74,8 +73,17 @@ export class Tab1Page {
       numero: ""
     };
 
-    this.senhaService.adicionarSenha(senha);
-    this.cdr.detectChanges()
+    const numeroSenha = this.senhaService.adicionarSenha(senha);
+    this.mostrarAlert(numeroSenha)
+  }
 
+  mostrarAlert(numeroSenha: string) {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Número da Senha';
+    alert.message = numeroSenha;
+    alert.buttons = ['OK'];
+  
+    document.body.appendChild(alert);
+    return alert.present();
   }
 }

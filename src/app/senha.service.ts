@@ -8,7 +8,7 @@ export class SenhaService {
   private senhas: any[] = [];
   private senhasChamadas: any[] = [];
   private sequenciaGeralAtual = 2;
-  private sequenciaPrioritariaAtual = 3;
+  private sequenciaPrioritariaAtual = 4;
   private sequenciaExamesAtual = 2;
   private senhasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private senhasChamadasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
@@ -16,15 +16,15 @@ export class SenhaService {
   constructor() {}
 
   // Adicionar senha ao array e notificar observadores
-  adicionarSenha(senha: any): void {
+  adicionarSenha(senha: any): string {
     let sequenciaAtual: number;
 
-    if (senha.tipo === 'person') {
-      sequenciaAtual = this.sequenciaGeralAtual;
-      this.sequenciaGeralAtual++;
-    } else if (senha.tipo === 'accessibility') {
+    if (senha.tipo === 'accessibility') {
       sequenciaAtual = this.sequenciaPrioritariaAtual;
       this.sequenciaPrioritariaAtual++;
+    } else if (senha.tipo === 'person') {
+      sequenciaAtual = this.sequenciaGeralAtual;
+      this.sequenciaGeralAtual++;
     } else if (senha.tipo === 'document') {
       sequenciaAtual = this.sequenciaExamesAtual;
       this.sequenciaExamesAtual++;
@@ -40,6 +40,9 @@ export class SenhaService {
     // Adicionar a senha chamada ao array de senhas chamadas
     this.senhasChamadas.push(senha);
     this.senhasChamadasSubject.next([...this.senhasChamadas]);
+
+    // Retornar o número da senha gerada
+    return senha.numero;
   }
 
   // Obter senhas como um Observable
