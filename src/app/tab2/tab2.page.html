@@ -1,3 +1,19 @@
 <div class="header">
 
 </div>
+
+<ion-content>
+    <ion-card>
+        
+    </ion-card>
+
+    <ion-accordion-group>
+        <ion-accordion value="{{[i]}}" *ngFor="let senha of senhasGeradas; let i = index" >
+            <ion-item slot="header" color="light">
+            <ion-label>{{senha.numero}}</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">Oi</div>
+        </ion-accordion>
+    </ion-accordion-group>
+
+</ion-content>
