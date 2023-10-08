@@ -1,0 +1,24 @@
+.emitidas div, p{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.atendidas div, p{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.emitidas, .atendidas{
+    background-color: gray;
+    border-radius: 16px;
+    padding: 5%;
+}
+
+.dados{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}

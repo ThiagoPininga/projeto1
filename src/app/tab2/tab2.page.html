@@ -1,19 +1,64 @@
 <div class="header">
-
+  <!-- Título ou cabeçalho opcional -->
 </div>
 
 <ion-content>
-    <ion-card>
-        
-    </ion-card>
+  <div class="dados">
+    <div class="emitidas">
+      <p>Emitidas</p>
+      <div>
+        <p>Total: </p>
+        <span>{{ senhasGeradas.length }}</span>
+      </div>
+      <div>
+        <p>Prioritárias: </p>
+        <span>{{ contarSenhasPorTipo(senhasGeradas, 'accessibility') }}</span>
+      </div>
+      <div>
+        <p>Gerais: </p>
+        <span>{{ contarSenhasPorTipo(senhasGeradas, 'person') }}</span>
+      </div>
+      <div>
+        <p>Exames: </p>
+        <span>{{ contarSenhasPorTipo(senhasGeradas, 'document') }}</span>
+      </div>
+    </div>
 
+    <div class="atendidas">
+      <p>Atendidas</p>
+      <div>
+        <p>Total: </p>
+        <span>{{ senhasAtendidas.length }}</span>
+      </div>
+      <div>
+        <p>Prioritárias: </p>
+        <span>{{ contarSenhasPorTipo(senhasAtendidas, 'accessibility') }}</span>
+      </div>
+      <div>
+        <p>Gerais: </p>
+        <span>{{ contarSenhasPorTipo(senhasAtendidas, 'person') }}</span>
+      </div>
+      <div>
+        <p>Exames: </p>
+        <span>{{ contarSenhasPorTipo(senhasAtendidas, 'document') }}</span>
+      </div>
+    </div>
+  </div>
+
+  <ion-card>
     <ion-accordion-group>
-        <ion-accordion value="{{[i]}}" *ngFor="let senha of senhasGeradas; let i = index" >
-            <ion-item slot="header" color="light">
-            <ion-label>{{senha.numero}}</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">Oi</div>
-        </ion-accordion>
+      <ion-accordion *ngFor="let senha of senhasGeradas; let i = index">
+        <ion-item slot="header" color="light">
+          <ion-icon name="{{senha.tipo}}"></ion-icon>
+          <ion-label> - {{ senha.numero }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <p>Data de Emissão: {{ senha.dataEmissao }}</p>
+          <p>Data de Atendimento: {{ senha.dataAtendimento }}</p>
+          <p>Guichê: {{ senha.guiche }}</p>
+        </div>
+      </ion-accordion>
     </ion-accordion-group>
-
+  </ion-card>
+  
 </ion-content>

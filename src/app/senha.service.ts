@@ -5,11 +5,55 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SenhaService {
-  private senhas: any[] = [];
-  private senhasChamadas: any[] = [];
+  private senhas: any[] = [
+    {
+      tipo: 'document',
+      numero: "231017-SE01"
+    },
+    {
+      tipo: 'person',
+      numero: "231017-SG01"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP03"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP02"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP01"
+    }
+  ];
+  private senhasChamadas: any[] = [
+    {
+      tipo: 'document',
+      numero: "231017-SE01"
+    },
+    {
+      tipo: 'person',
+      numero: "231017-SG01"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP03"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP02"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP01"
+    }
+  ];
   private sequenciaGeralAtual = 2;
   private sequenciaPrioritariaAtual = 4;
   private sequenciaExamesAtual = 2;
+  private total = 8;
+  private senhasAtendidasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private senhasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private senhasChamadasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
@@ -31,14 +75,14 @@ export class SenhaService {
     } else {
       throw new Error('Tipo de senha inválido.');
     }
+    this.total++;
 
     senha.numero = this.gerarNumero(senha.tipo, sequenciaAtual);
 
-    this.senhas.push(senha);
+    this.senhas.unshift(senha);
     this.senhasSubject.next([...this.senhas]);
 
-    // Adicionar a senha chamada ao array de senhas chamadas
-    this.senhasChamadas.push(senha);
+    
     this.senhasChamadasSubject.next([...this.senhasChamadas]);
 
     // Retornar o número da senha gerada
@@ -54,6 +98,7 @@ export class SenhaService {
   getSenhasChamadas(): Observable<any[]> {
     return this.senhasChamadasSubject.asObservable();
   }
+
 
   private gerarNumero(tipo: string, sequencia: number): string {
     const dataAtual = new Date();
