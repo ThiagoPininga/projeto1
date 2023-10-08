@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { SenhaService } from '../senha.service';
 
 @Component({
@@ -7,8 +7,29 @@ import { SenhaService } from '../senha.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  senhasChamadas: any[] = []
-  constructor(private senhaService: SenhaService) {}
+  senhasChamadas: any[] = [
+    {
+      tipo: 'document',
+      numero: "231017-SE01"
+    },
+    {
+      tipo: 'person',
+      numero: "231017-SG01"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP03"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP02"
+    },
+    {
+      tipo: 'accessibility',
+      numero: "231017-SP01"
+    }
+  ];
+  constructor(private senhaService: SenhaService, private cdr: ChangeDetectorRef) {}
 
   gerarSenhaPrioritaria() {
     const senha = {
@@ -16,10 +37,12 @@ export class Tab1Page {
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
       horaAtendimento: '',
-      guiche: ''
+      guiche: '',
+      numero: ""
     };
 
     this.senhaService.adicionarSenha(senha);
+    this.cdr.detectChanges()
   }
 
   gerarSenhaGeral() {
@@ -28,10 +51,13 @@ export class Tab1Page {
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
       horaAtendimento: '',
-      guiche: ''
+      guiche: '',
+      numero: ""
     };
 
     this.senhaService.adicionarSenha(senha);
+    this.cdr.detectChanges()
+
 
     console.log(this.senhaService.getSenhas())
     console.log(this.senhaService.getSenhasChamadas())
@@ -44,9 +70,12 @@ export class Tab1Page {
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
       horaAtendimento: '',
-      guiche: ''
+      guiche: '',
+      numero: ""
     };
 
     this.senhaService.adicionarSenha(senha);
+    this.cdr.detectChanges()
+
   }
 }

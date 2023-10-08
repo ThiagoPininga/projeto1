@@ -5,35 +5,41 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SenhaService {
-  private senhas: any[] = [{
-
-  }];
-  private senhasChamadas: any[] = [{
-
-  }];
-  private sequenciaGeralAtual = 1;
-  private sequenciaPrioritariaAtual = 1;
-  private sequenciaExamesAtual = 1;
+  private senhas: any[] = [];
+  private senhasChamadas: any[] = [];
+  private sequenciaGeralAtual = 2;
+  private sequenciaPrioritariaAtual = 3;
+  private sequenciaExamesAtual = 2;
   private senhasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  private senhasChamadasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]); // Subject para senhas chamadas
+  private senhasChamadasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor() {}
 
   // Adicionar senha ao array e notificar observadores
   adicionarSenha(senha: any): void {
-    if (senha.tipo === 'geral') {
-      senha.numero = this.gerarNumero('GE', this.sequenciaGeralAtual);
+    let sequenciaAtual: number;
+
+    if (senha.tipo === 'person') {
+      sequenciaAtual = this.sequenciaGeralAtual;
       this.sequenciaGeralAtual++;
-    } else if (senha.tipo === 'prioritario') {
-      senha.numero = this.gerarNumero('PR', this.sequenciaPrioritariaAtual);
+    } else if (senha.tipo === 'accessibility') {
+      sequenciaAtual = this.sequenciaPrioritariaAtual;
       this.sequenciaPrioritariaAtual++;
-    } else if (senha.tipo === 'exames') {
-      senha.numero = this.gerarNumero('EX', this.sequenciaExamesAtual);
+    } else if (senha.tipo === 'document') {
+      sequenciaAtual = this.sequenciaExamesAtual;
       this.sequenciaExamesAtual++;
+    } else {
+      throw new Error('Tipo de senha inválido.');
     }
+
+    senha.numero = this.gerarNumero(senha.tipo, sequenciaAtual);
 
     this.senhas.push(senha);
     this.senhasSubject.next([...this.senhas]);
+
+    // Adicionar a senha chamada ao array de senhas chamadas
+    this.senhasChamadas.push(senha);
+    this.senhasChamadasSubject.next([...this.senhasChamadas]);
   }
 
   // Obter senhas como um Observable
@@ -52,6 +58,13 @@ export class SenhaService {
     const mes = ('0' + (dataAtual.getMonth() + 1)).slice(-2);
     const dia = ('0' + dataAtual.getDate()).slice(-2);
     const sequenciaFormatada = ('00' + sequencia).slice(-2);
-    return `${ano}${mes}${dia}-${tipo}${sequenciaFormatada}`;
+
+    if(tipo == 'document'){
+      return `${ano}${mes}${dia}-SE${sequenciaFormatada}`;
+    }else if(tipo == 'accessibility'){
+      return `${ano}${mes}${dia}-SP${sequenciaFormatada}`;
+    }else{
+      return `${ano}${mes}${dia}-SG${sequenciaFormatada}`;
+    }
   }
 }
