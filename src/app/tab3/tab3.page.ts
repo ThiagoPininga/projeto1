@@ -6,6 +6,22 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  alunos: any[] = [{
+    nome: "Leonardo Luiz Guedes Coelho",
+    matricula: "01525716"
+  },
+  {
+    nome: "Pedro Henrique Feitosa da Silva",
+    matricula: "01525716"
+  },
+  {
+    nome: "Marcos Duarte Vieira da Silva",
+    matricula: "01525716"
+  },
+  {
+    nome: "Thiago Pininga Tavares",
+    matricula: "01525716"
+  }]
 
   constructor() {}
 

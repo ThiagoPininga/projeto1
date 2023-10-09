@@ -57,10 +57,6 @@ export class Tab1Page {
 
     const numeroSenha = this.senhaService.adicionarSenha(senha);
     this.mostrarAlert(numeroSenha)
-
-
-    console.log(this.senhaService.getSenhas())
-    console.log(this.senhaService.getSenhasChamadas())
   }
 
   gerarSenhaExames() {

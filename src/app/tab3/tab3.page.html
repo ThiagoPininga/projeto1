@@ -1,3 +1,24 @@
 <div class="header">
 
 </div>
+
+<ion-content>  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dados do aluno</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        
+        <ion-item *ngFor="let aluno of alunos" >
+        
+            <ion-icon name="person-circle"></ion-icon>
+          
+  
+          <ion-label class="ion-text-wrap">{{aluno.nome}} - {{aluno.matricula}}</ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  
+  
