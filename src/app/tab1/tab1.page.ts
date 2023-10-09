@@ -36,7 +36,6 @@ export class Tab1Page {
       tipo: 'accessibility',
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
-      horaAtendimento: '',
       guiche: '',
       numero: ""
     };
@@ -50,7 +49,6 @@ export class Tab1Page {
       tipo: 'person',
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
-      horaAtendimento: '',
       guiche: '',
       numero: ""
     };
@@ -64,7 +62,6 @@ export class Tab1Page {
       tipo: 'document',
       dataEmissao: new Date().toLocaleString(),
       dataAtendimento: '',
-      horaAtendimento: '',
       guiche: '',
       numero: ""
     };

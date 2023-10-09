@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
 export class Tab3Page {
   alunos: any[] = [{
     nome: "Leonardo Luiz Guedes Coelho",
-    matricula: "01525716"
+    matricula: "01515698"
   },
   {
     nome: "Pedro Henrique Feitosa da Silva",
-    matricula: "01525716"
+    matricula: "01516541"
   },
   {
     nome: "Marcos Duarte Vieira da Silva",
-    matricula: "01525716"
+    matricula: "01524163"
   },
   {
     nome: "Thiago Pininga Tavares",

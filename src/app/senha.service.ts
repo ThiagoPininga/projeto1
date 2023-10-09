@@ -8,44 +8,74 @@ export class SenhaService {
   private senhas: any[] = [
     {
       tipo: 'document',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SE01"
     },
     {
       tipo: 'person',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SG01"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP03"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP02"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP01"
     }
   ];
   private senhasChamadas: any[] = [
     {
       tipo: 'document',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SE01"
     },
     {
       tipo: 'person',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SG01"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP03"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP02"
     },
     {
       tipo: 'accessibility',
+      dataEmissao: '08/10/2023, 15:32:45',
+      dataAtendimento: '08/10/2023 , 15:32:45',
+      guiche: '3',
       numero: "231017-SP01"
     }
   ];
